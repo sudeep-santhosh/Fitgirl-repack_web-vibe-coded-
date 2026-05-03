@@ -1,0 +1,173 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>FitGirl Catalog</title>
+    <meta
+      name="description"
+      content="A modern discovery interface for the official FitGirl Repacks catalog with safer browsing, fast search, and clean game metadata."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="FitGirl Catalog home">
+        <span class="fitgirl-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" role="img">
+            <circle cx="24" cy="24" r="22" />
+            <path d="M15 29c2.5 5.5 15.5 5.5 18 0" />
+            <path d="M16 19c4-8 14-8 18 0" />
+            <path d="M15 21c4 2 14 2 18 0" />
+            <path d="M18 25h.1M30 25h.1" />
+          </svg>
+        </span>
+        <span>
+          <strong>FitGirl Catalog</strong>
+          <small>Repack Library</small>
+        </span>
+      </a>
+
+      <button class="header-search" type="button" data-search-open>
+        <span aria-hidden="true">Search</span>
+        <span>Search games, genres, or sizes</span>
+        <kbd>Ctrl K</kbd>
+      </button>
+
+      <nav class="topnav" aria-label="Primary">
+        <a href="/catalog">Catalog</a>
+        <a href="#recent">Updates</a>
+        <a href="#favorites">Favorites</a>
+        <a href="#safety">Safety</a>
+        <a href="#library">Library</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="official-warning" id="safety">
+        <div>
+          <strong>Official source only</strong>
+          <p>Use the verified domain. Avoid clone sites, typo domains, ad redirects, and mirror claims.</p>
+        </div>
+        <a href="https://fitgirl-repacks.site/" rel="noreferrer">https://fitgirl-repacks.site/</a>
+      </section>
+
+      <section class="section-block" id="top10">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">Homepage discovery</p>
+            <h1>Top 10 Trending / Popular Repacks</h1>
+          </div>
+          <div class="tabs" role="tablist" aria-label="Top 10 views">
+            <button class="tab is-active" type="button" data-home-tab="trending">Trending</button>
+            <button class="tab" type="button" data-home-tab="updated">Recently Updated</button>
+            <button class="tab" type="button" data-home-tab="new">New Releases</button>
+          </div>
+        </div>
+        <section class="game-grid top-grid" id="topGrid" aria-live="polite"></section>
+      </section>
+
+      <section class="split-section">
+        <div class="section-block" id="recent">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">Fresh changes</p>
+              <h2>Recently Updated</h2>
+            </div>
+            <a class="text-link" href="/catalog?sort=updated">View catalog</a>
+          </div>
+          <div class="mini-list" id="recentList"></div>
+        </div>
+
+        <div class="section-block">
+          <div class="section-heading compact">
+            <div>
+              <p class="eyebrow">Latest arrivals</p>
+              <h2>New Releases</h2>
+            </div>
+            <a class="text-link" href="/catalog?sort=new">Browse all</a>
+          </div>
+          <div class="mini-list" id="newList"></div>
+        </div>
+      </section>
+
+      <section class="section-block">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">Quick browsing</p>
+            <h2>Browse by Genre</h2>
+          </div>
+        </div>
+        <div class="genre-rail" id="genreRail"></div>
+      </section>
+
+      <section class="section-block search-cta">
+        <div>
+          <p class="eyebrow">Find something specific</p>
+          <h2>Open quick search or jump into the full catalog.</h2>
+        </div>
+        <div class="cta-actions">
+          <button class="primary-button" type="button" data-search-open>Quick Search</button>
+          <a class="secondary-button" href="/catalog">Open Catalog</a>
+        </div>
+      </section>
+
+      <section class="section-block" id="notes">
+        <div class="section-heading compact">
+          <div>
+            <p class="eyebrow">Community notes</p>
+            <h2>Helpful install highlights</h2>
+          </div>
+        </div>
+        <div class="notes-grid">
+          <article><strong>Setup pause</strong><span>Some installers can appear frozen near high percentages. Wait before force closing.</span></article>
+          <article><strong>False positives</strong><span>Security tools may flag repack components. Verify the official source first.</span></article>
+          <article><strong>Runtime fixes</strong><span>VC++ redistributables, DirectX, and compatibility mode solve many first-launch issues.</span></article>
+          <article><strong>Hyper-V notes</strong><span>Some games need extra setup when virtualization or anti-cheat conflicts appear.</span></article>
+        </div>
+      </section>
+    </main>
+
+    <aside class="quick-drawer" id="quickDrawer" aria-hidden="true" aria-label="Quick preview">
+      <button class="drawer-close" type="button" data-drawer-close aria-label="Close preview">&times;</button>
+      <div id="drawerContent"></div>
+    </aside>
+    <div class="drawer-scrim" data-drawer-close></div>
+
+    <section class="search-overlay" id="searchOverlay" aria-hidden="true">
+      <div class="search-modal" role="dialog" aria-modal="true" aria-label="Search catalog">
+        <div class="overlay-search-row">
+          <span aria-hidden="true">Search</span>
+          <input id="overlaySearchInput" type="search" placeholder="Search Elden Ring, horror co-op, under 30GB..." />
+          <button type="button" data-search-close>Close</button>
+        </div>
+        <div class="overlay-content">
+          <section>
+            <h3>Instant suggestions</h3>
+            <div class="suggestions-list" id="suggestionsList"></div>
+          </section>
+          <section>
+            <h3>Trending queries</h3>
+            <div class="shortcut-grid">
+              <button type="button" data-query="open world">Open world</button>
+              <button type="button" data-query="horror coop">Horror co-op</button>
+              <button type="button" data-query="low end">Low-end PC</button>
+              <button type="button" data-query="steam deck">Steam Deck</button>
+            </div>
+          </section>
+          <section>
+            <h3>Genre shortcuts</h3>
+            <div class="shortcut-grid" id="overlayGenres"></div>
+          </section>
+        </div>
+        <a class="view-all-results" id="viewAllResults" href="/catalog">View all results in catalog</a>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Official reference: <a href="https://fitgirl-repacks.site/" rel="noreferrer">fitgirl-repacks.site</a></p>
+    </footer>
+
+    <script src="app.js" type="module"></script>
+  </body>
+</html>
