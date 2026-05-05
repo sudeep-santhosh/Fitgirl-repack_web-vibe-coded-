@@ -1,0 +1,136 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Catalog - FitGirl Catalog</title>
+    <meta
+      name="description"
+      content="Search and browse the locally indexed official FitGirl Repacks A-Z catalog."
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <header class="site-header">
+      <a class="brand" href="/" aria-label="FitGirl Catalog home">
+        <span class="fitgirl-mark" aria-hidden="true">
+          <svg viewBox="0 0 48 48" role="img">
+            <circle cx="24" cy="24" r="22" />
+            <path d="M15 29c2.5 5.5 15.5 5.5 18 0" />
+            <path d="M16 19c4-8 14-8 18 0" />
+            <path d="M15 21c4 2 14 2 18 0" />
+            <path d="M18 25h.1M30 25h.1" />
+          </svg>
+        </span>
+        <span>
+          <strong>FitGirl Catalog</strong>
+          <small>Full A-Z index</small>
+        </span>
+      </a>
+      <div class="catalog-header-search">
+        <input id="catalogSearch" type="search" placeholder="Search the full official catalog..." />
+      </div>
+      <nav class="topnav" aria-label="Primary">
+        <a href="/">Home</a>
+        <a href="#results">Results</a>
+        <a href="#safety">Safety</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="official-warning" id="safety">
+        <div>
+          <strong>Official source only</strong>
+          <p>Catalog links point to the official domain only. Verify the URL before downloading anything.</p>
+        </div>
+        <a href="https://fitgirl-repacks.site/" rel="noreferrer">https://fitgirl-repacks.site/</a>
+      </section>
+
+      <section class="catalog-shell" id="results">
+        <button class="secondary-button filter-toggle" type="button" id="filterToggle">Filters</button>
+        <aside class="catalog-sidebar" id="catalogSidebar">
+          <h2>Filters</h2>
+          <label>
+            Genre
+            <select id="genreFilter">
+              <option value="">Any genre</option>
+              <option value="action">Action</option>
+              <option value="rpg">RPG</option>
+              <option value="racing">Racing</option>
+              <option value="horror">Horror</option>
+              <option value="strategy">Strategy</option>
+              <option value="simulation">Simulation</option>
+              <option value="survival">Survival</option>
+              <option value="open-world">Open World</option>
+              <option value="soulslike">Soulslike</option>
+              <option value="sandbox">Sandbox</option>
+              <option value="tactical">Tactical</option>
+              <option value="roguelike">Roguelike</option>
+              <option value="metroidvania">Metroidvania</option>
+              <option value="first-person">First Person</option>
+              <option value="third-person">Third Person</option>
+              <option value="isometric">Isometric</option>
+              <option value="top-down">Top Down</option>
+              <option value="singleplayer">Singleplayer</option>
+              <option value="multiplayer">Multiplayer</option>
+              <option value="co-op">Co-op</option>
+              <option value="online-pvp">Online PvP</option>
+              <option value="fantasy">Fantasy</option>
+              <option value="zombies">Zombies</option>
+              <option value="space">Space</option>
+              <option value="cyberpunk">Cyberpunk</option>
+              <option value="historical">Historical</option>
+              <option value="military">Military</option>
+              <option value="post-apocalyptic">Post-Apocalyptic</option>
+            </select>
+          </label>
+          <label>
+            System
+            <select id="systemFilter">
+              <option value="">Any system</option>
+              <option>Controller Friendly</option>
+              <option>Low-End PC Friendly</option>
+              <option>Steam Deck Friendly</option>
+              <option>Keyboard + Mouse Only</option>
+            </select>
+          </label>
+          <label class="checkbox-row">
+            <input id="richOnly" type="checkbox" />
+            Rich cards only
+          </label>
+        </aside>
+
+        <section class="catalog-main">
+          <div class="catalog-toolbar">
+            <div>
+              <p class="eyebrow">Full catalog</p>
+              <h1><span id="catalogResultCount">0</span> official entries</h1>
+            </div>
+            <label>
+              Sort
+              <select id="catalogSort">
+                <option value="titleAsc">A-Z</option>
+                <option value="titleDesc">Z-A</option>
+                <option value="updated">Recently updated cards</option>
+              </select>
+            </label>
+          </div>
+          <div class="catalog-results" id="catalogResults"></div>
+          <div class="pagination">
+            <button type="button" id="prevPage">Previous</button>
+            <span id="pageLabel">Page 1</span>
+            <button type="button" id="nextPage">Next</button>
+          </div>
+        </section>
+      </section>
+    </main>
+
+    <aside class="quick-drawer" id="quickDrawer" aria-hidden="true" aria-label="Quick preview">
+      <button class="drawer-close" type="button" data-drawer-close aria-label="Close preview">&times;</button>
+      <div id="drawerContent"></div>
+    </aside>
+    <div class="drawer-scrim" data-drawer-close></div>
+
+    <script src="catalog.js" type="module"></script>
+  </body>
+</html>
