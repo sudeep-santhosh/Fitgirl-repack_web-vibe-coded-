@@ -1,0 +1,510 @@
+[
+  {
+    "title": "Grand Theft Auto V / GTA 5",
+    "year": 2026,
+    "genres": [
+      "Action",
+      "Open World",
+      "AAA",
+      "Multiplayer"
+    ],
+    "systems": [
+      "Controller Friendly"
+    ],
+    "repackSize": 66.3,
+    "originalSize": 124.8,
+    "mode": "Multiplayer",
+    "controller": true,
+    "lowEnd": false,
+    "steamDeck": false,
+    "updated": "2026-04-28",
+    "latestVersion": "Legacy build",
+    "warning": "Large install",
+    "hypervisor": false,
+    "sourcePath": "https://fitgirl-repacks.site/grand-theft-auto-v/",
+    "image": "https://i0.wp.com/i8.imageban.ru/out/2026/04/17/a899a3b2eeda72ff8ed3f80d50d09048.jpg?resize=150%2C200&ssl=1",
+    "colors": [
+      "#22c55e",
+      "#111827"
+    ],
+    "tags": {
+      "genre": [
+        "Action"
+      ],
+      "subgenre": [
+        "Open World",
+        "Sandbox"
+      ],
+      "perspective": [
+        "Third Person",
+        "First Person"
+      ],
+      "mode": [
+        "Singleplayer",
+        "Multiplayer",
+        "Online PvP"
+      ],
+      "theme": [
+        "Crime"
+      ],
+      "platform": [
+        "PC"
+      ]
+    }
+  },
+  {
+    "title": "Elden Ring",
+    "year": 2024,
+    "genres": [
+      "RPG",
+      "Action",
+      "Open World",
+      "Soulslike",
+      "AAA"
+    ],
+    "systems": [
+      "Controller Friendly"
+    ],
+    "repackSize": 47.4,
+    "originalSize": 66.4,
+    "mode": "Singleplayer",
+    "controller": true,
+    "lowEnd": false,
+    "steamDeck": true,
+    "updated": "2024-06-21",
+    "latestVersion": "v1.12/v1.12.1",
+    "warning": "",
+    "hypervisor": false,
+    "sourcePath": "https://fitgirl-repacks.site/elden-ring/",
+    "image": "https://i3.imageban.ru/out/2024/06/21/532a2f7805dda1edb2200207e937e43e.jpg",
+    "colors": [
+      "#f5c451",
+      "#273313"
+    ],
+    "tags": {
+      "genre": [
+        "Action",
+        "RPG"
+      ],
+      "subgenre": [
+        "Open World",
+        "Soulslike"
+      ],
+      "perspective": [
+        "Third Person"
+      ],
+      "mode": [
+        "Singleplayer"
+      ],
+      "theme": [
+        "Fantasy"
+      ],
+      "platform": [
+        "PC"
+      ]
+    }
+  },
+  {
+    "title": "Dragon's Dogma 2",
+    "year": 2026,
+    "genres": [
+      "RPG",
+      "Action",
+      "Open World",
+      "AAA"
+    ],
+    "systems": [
+      "Controller Friendly"
+    ],
+    "repackSize": 38.3,
+    "originalSize": 67.2,
+    "mode": "Singleplayer",
+    "controller": true,
+    "lowEnd": false,
+    "steamDeck": false,
+    "updated": "2026-04-28",
+    "latestVersion": "v3.002.000",
+    "warning": "Hypervisor launch notes",
+    "hypervisor": true,
+    "sourcePath": "https://fitgirl-repacks.site/dragons-dogma-2-de/",
+    "image": "https://i1.imageban.ru/out/2026/04/27/17f7837904002204c14bed9ca8c7ea31.jpg",
+    "colors": [
+      "#a16207",
+      "#1f2937"
+    ],
+    "tags": {
+      "genre": [
+        "Action",
+        "RPG"
+      ],
+      "subgenre": [
+        "Open World"
+      ],
+      "perspective": [
+        "Third Person"
+      ],
+      "mode": [
+        "Singleplayer"
+      ],
+      "theme": [
+        "Fantasy"
+      ],
+      "platform": [
+        "PC"
+      ]
+    }
+  },
+  {
+    "title": "Jurassic World Evolution 3",
+    "year": 2026,
+    "genres": [
+      "Strategy",
+      "Sandbox",
+      "AAA"
+    ],
+    "systems": [
+      "Controller Friendly"
+    ],
+    "repackSize": 28.8,
+    "originalSize": 45.4,
+    "mode": "Singleplayer",
+    "controller": true,
+    "lowEnd": false,
+    "steamDeck": false,
+    "updated": "2026-04-27",
+    "latestVersion": "v1.2.6.805109",
+    "warning": "",
+    "hypervisor": false,
+    "sourcePath": "https://fitgirl-repacks.site/jurassic-world-evolution-3/",
+    "image": "https://i1.imageban.ru/out/2026/04/26/98e34e70d8e4b5cc082da9bc7a9f3a5b.jpg",
+    "colors": [
+      "#34d399",
+      "#f59e0b"
+    ],
+    "tags": {
+      "genre": [
+        "Strategy",
+        "Simulation"
+      ],
+      "subgenre": [
+        "Sandbox",
+        "Management"
+      ],
+      "perspective": [
+        "Isometric"
+      ],
+      "mode": [
+        "Singleplayer"
+      ],
+      "theme": [
+        "Dinosaurs"
+      ],
+      "platform": [
+        "PC"
+      ]
+    }
+  },
+  {
+    "title": "Assassin's Creed Valhalla",
+    "year": 2026,
+    "genres": [
+      "Action",
+      "Open World",
+      "AAA",
+      "RPG"
+    ],
+    "systems": [
+      "Controller Friendly"
+    ],
+    "repackSize": 45.9,
+    "originalSize": 160.8,
+    "mode": "Singleplayer",
+    "controller": true,
+    "lowEnd": false,
+    "steamDeck": false,
+    "updated": "2026-04-24",
+    "latestVersion": "v1.7.0",
+    "warning": "Hypervisor build",
+    "hypervisor": true,
+    "sourcePath": "https://fitgirl-repacks.site/assassins-creed-valhalla/",
+    "image": "https://i8.imageban.ru/out/2026/04/24/7a380d732a6981133eefe010173bc213.jpg",
+    "colors": [
+      "#38bdf8",
+      "#1e3a8a"
+    ],
+    "tags": {
+      "genre": [
+        "Action",
+        "RPG"
+      ],
+      "subgenre": [
+        "Open World"
+      ],
+      "perspective": [
+        "Third Person"
+      ],
+      "mode": [
+        "Singleplayer"
+      ],
+      "theme": [
+        "Historical"
+      ],
+      "platform": [
+        "PC"
+      ]
+    }
+  },
+  {
+    "title": "Far Cry 5",
+    "year": 2018,
+    "genres": [
+      "Action",
+      "Open World",
+      "Co-op",
+      "AAA"
+    ],
+    "systems": [
+      "Controller Friendly"
+    ],
+    "repackSize": 21.8,
+    "originalSize": 83.4,
+    "mode": "Co-op",
+    "controller": true,
+    "lowEnd": false,
+    "steamDeck": false,
+    "updated": "2018-11-24",
+    "latestVersion": "v1.011",
+    "warning": "Windows compatibility note",
+    "hypervisor": true,
+    "sourcePath": "https://fitgirl-repacks.site/far-cry-5/",
+    "image": "https://i106.fastpic.ru/big/2018/1124/e3/287fa440de01fb6d133d3e5342f89fe3.jpg",
+    "colors": [
+      "#ef4444",
+      "#f97316"
+    ],
+    "tags": {
+      "genre": [
+        "Action"
+      ],
+      "subgenre": [
+        "Open World"
+      ],
+      "perspective": [
+        "First Person"
+      ],
+      "mode": [
+        "Singleplayer",
+        "Co-op"
+      ],
+      "theme": [
+        "Military"
+      ],
+      "platform": [
+        "PC"
+      ]
+    }
+  },
+  {
+    "title": "Soulstone Survivors",
+    "year": 2025,
+    "genres": [
+      "Action",
+      "Indie",
+      "Survival"
+    ],
+    "systems": [
+      "Controller Friendly",
+      "Low-End PC Friendly",
+      "Steam Deck Friendly"
+    ],
+    "repackSize": 0.9,
+    "originalSize": 5.7,
+    "mode": "Singleplayer",
+    "controller": true,
+    "lowEnd": true,
+    "steamDeck": true,
+    "updated": "2025-06-20",
+    "latestVersion": "v1.0f",
+    "warning": "",
+    "hypervisor": false,
+    "sourcePath": "https://fitgirl-repacks.site/soulstone-survivors/",
+    "image": "https://i5.imageban.ru/out/2025/06/20/3f850069020fe31e789de1c92c1d3104.jpg",
+    "colors": [
+      "#f43f5e",
+      "#facc15"
+    ],
+    "tags": {
+      "genre": [
+        "Action",
+        "Survival"
+      ],
+      "subgenre": [
+        "Roguelike"
+      ],
+      "perspective": [
+        "Top Down"
+      ],
+      "mode": [
+        "Singleplayer"
+      ],
+      "theme": [
+        "Fantasy"
+      ],
+      "platform": [
+        "PC"
+      ]
+    }
+  },
+  {
+    "title": "Demonologist",
+    "year": 2023,
+    "genres": [
+      "Horror",
+      "Co-op",
+      "Multiplayer"
+    ],
+    "systems": [
+      "Controller Friendly"
+    ],
+    "repackSize": 12.6,
+    "originalSize": 22.4,
+    "mode": "Multiplayer",
+    "controller": true,
+    "lowEnd": false,
+    "steamDeck": true,
+    "updated": "2026-04-27",
+    "latestVersion": "v2.0.3",
+    "warning": "Online features may need notes",
+    "hypervisor": false,
+    "sourcePath": "https://fitgirl-repacks.site/demonologist/",
+    "image": "https://i1.imageban.ru/out/2023/09/30/b1473360fc052bfe60e2fc86a7699eb2.jpg",
+    "colors": [
+      "#9333ea",
+      "#111827"
+    ],
+    "tags": {
+      "genre": [
+        "Horror"
+      ],
+      "subgenre": [
+        "Investigation"
+      ],
+      "perspective": [
+        "First Person"
+      ],
+      "mode": [
+        "Singleplayer",
+        "Co-op",
+        "Multiplayer"
+      ],
+      "theme": [
+        "Supernatural"
+      ],
+      "platform": [
+        "PC"
+      ]
+    }
+  },
+  {
+    "title": "GRID Legends",
+    "year": 2026,
+    "genres": [
+      "Racing",
+      "AAA",
+      "Multiplayer"
+    ],
+    "systems": [
+      "Controller Friendly"
+    ],
+    "repackSize": 12.4,
+    "originalSize": 31.8,
+    "mode": "Multiplayer",
+    "controller": true,
+    "lowEnd": false,
+    "steamDeck": false,
+    "updated": "2026-04-23",
+    "latestVersion": "v6.2.80.660",
+    "warning": "Hypervisor build",
+    "hypervisor": true,
+    "sourcePath": "https://fitgirl-repacks.site/grid-legends-deluxe-edition/",
+    "image": "https://i8.imageban.ru/out/2026/04/23/b91854f95a684dc67a7df738976c48d9.jpg",
+    "colors": [
+      "#dc2626",
+      "#111827"
+    ],
+    "tags": {
+      "genre": [
+        "Racing"
+      ],
+      "subgenre": [
+        "Arcade"
+      ],
+      "perspective": [
+        "First Person",
+        "Third Person"
+      ],
+      "mode": [
+        "Singleplayer",
+        "Multiplayer",
+        "Online PvP"
+      ],
+      "theme": [
+        "Cars"
+      ],
+      "platform": [
+        "PC"
+      ]
+    }
+  },
+  {
+    "title": "Coromon",
+    "year": 2025,
+    "genres": [
+      "RPG",
+      "Anime",
+      "Indie",
+      "Story Rich"
+    ],
+    "systems": [
+      "Controller Friendly",
+      "Low-End PC Friendly",
+      "Steam Deck Friendly"
+    ],
+    "repackSize": 0.7,
+    "originalSize": 4,
+    "mode": "Singleplayer",
+    "controller": true,
+    "lowEnd": true,
+    "steamDeck": true,
+    "updated": "2025-01-05",
+    "latestVersion": "v1.3.6",
+    "warning": "",
+    "hypervisor": false,
+    "sourcePath": "https://fitgirl-repacks.site/coromon/",
+    "image": "https://i7.imageban.ru/out/2023/09/28/4594783c14a2c436f13c958abe2da421.jpg",
+    "colors": [
+      "#0ea5e9",
+      "#f472b6"
+    ],
+    "tags": {
+      "genre": [
+        "RPG"
+      ],
+      "subgenre": [
+        "Monster Taming"
+      ],
+      "perspective": [
+        "Top Down"
+      ],
+      "mode": [
+        "Singleplayer"
+      ],
+      "theme": [
+        "Fantasy"
+      ],
+      "platform": [
+        "PC"
+      ]
+    }
+  }
+]

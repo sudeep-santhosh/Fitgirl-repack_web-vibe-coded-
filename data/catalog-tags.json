@@ -1,0 +1,42 @@
+{
+  "grand-theft-auto-v": {
+    "genre": ["Action"],
+    "subgenre": ["Open World", "Sandbox"],
+    "perspective": ["Third Person", "First Person"],
+    "mode": ["Singleplayer", "Multiplayer", "Online PvP"],
+    "theme": ["Crime"],
+    "platform": ["PC"]
+  },
+  "elden-ring": {
+    "genre": ["Action", "RPG"],
+    "subgenre": ["Open World", "Soulslike"],
+    "perspective": ["Third Person"],
+    "mode": ["Singleplayer"],
+    "theme": ["Fantasy"],
+    "platform": ["PC"]
+  },
+  "cyberpunk-2077": {
+    "genre": ["Action", "RPG"],
+    "subgenre": ["Open World"],
+    "perspective": ["First Person", "Third Person"],
+    "mode": ["Singleplayer"],
+    "theme": ["Cyberpunk"],
+    "platform": ["PC"]
+  },
+  "need-for-speed-heat": {
+    "genre": ["Racing"],
+    "subgenre": ["Open World", "Arcade"],
+    "perspective": ["First Person", "Third Person"],
+    "mode": ["Singleplayer"],
+    "theme": ["Cars"],
+    "platform": ["PC"]
+  },
+  "forza-horizon-5": {
+    "genre": ["Racing"],
+    "subgenre": ["Open World", "Arcade"],
+    "perspective": ["First Person", "Third Person"],
+    "mode": ["Singleplayer", "Multiplayer", "Online PvP"],
+    "theme": ["Cars"],
+    "platform": ["PC"]
+  }
+}
