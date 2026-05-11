@@ -209,7 +209,7 @@ function updateSuggestions() {
       (game) => `
         <a class="suggestion-row" href="${game.url || officialSource}" rel="noreferrer">
           <span>${game.title}</span>
-          <small>Official</small>
+          <small>Catalog</small>
         </a>
       `,
     )
