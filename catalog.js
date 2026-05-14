@@ -5,6 +5,7 @@ let catalog = [];
 let richGames = [];
 let catalogTags = {};
 let catalogMetadata = {};
+let enrichedCatalog = {};
 const pendingMetadata = new Set();
 let page = 1;
 
@@ -59,7 +60,7 @@ const els = {
 };
 
 function formatDate(value) {
-  if (!value) return "Official source";
+  if (!value) return "Source page";
   return new Intl.DateTimeFormat("en", { month: "short", day: "numeric", year: "numeric" }).format(
     new Date(`${value}T00:00:00`),
   );
@@ -80,8 +81,11 @@ function normalizeFilterValue(value) {
 
 function searchableTags(game, entry) {
   const metadata = catalogMetadata[entry?.url] || {};
-  const structuredTags = game?.tags || catalogTags[entry?.id] || inferTags(entry, metadata);
+  const enriched = enrichedCatalog[entry?.id] || {};
+  const structuredTags = game?.tags || catalogTags[entry?.id] || {};
   return [
+    ...(enriched.genres || []),
+    ...(enriched.tags || []),
     ...(game?.genres || []),
     game?.mode,
     ...(game?.systems || []),
@@ -152,8 +156,11 @@ function richByUrl(entry) {
 
 function displayTags(entry, rich) {
   const metadata = catalogMetadata[entry.url];
-  const structured = rich?.tags || catalogTags[entry.id] || inferTags(entry, metadata);
+  const enriched = enrichedCatalog[entry.id] || {};
+  const structured = rich?.tags || catalogTags[entry.id] || {};
   const tags = [
+    ...(enriched.genres || []),
+    ...(enriched.tags || []),
     ...(rich?.genres || []),
     ...(metadata?.tags || []),
     ...(structured.genre || []),
@@ -225,8 +232,8 @@ function catalogCard(entry) {
   const metadata = catalogMetadata[entry.url];
   const image = metadata?.image;
   const tags = displayTags(entry).map((tag) => `<span class="tag">${tag}</span>`).join("");
-  const size = metadata?.repackSize || "Official page";
-  const date = metadata?.date ? formatDate(metadata.date.slice(0, 10)) : "Official source";
+  const size = metadata?.repackSize || "Details page";
+  const date = metadata?.date ? formatDate(metadata.date.slice(0, 10)) : "Source page";
 
   return `
     <article class="game-card catalog-preview-card" data-url="${entry.url}">
@@ -240,9 +247,9 @@ function catalogCard(entry) {
       </a>
       <div class="card-body">
         <h3 class="card-title">${entry.title}</h3>
-        <div class="tag-list">${tags || `<span class="tag">Official</span>`}</div>
+        <div class="tag-list">${tags}</div>
         <div class="size-row"><span>${date}</span><strong>${size}</strong></div>
-        <a class="details-button" href="${entry.url}" rel="noreferrer">Official Details</a>
+        <a class="details-button" href="${entry.url}" rel="noreferrer">View Details</a>
       </div>
     </article>
   `;
@@ -306,7 +313,7 @@ function updateMetadataCard(entry, metadata) {
     tags.innerHTML = displayTags(entry).map((tag) => `<span class="tag">${tag}</span>`).join("");
   }
   if (sizeRow) {
-    sizeRow.innerHTML = `<span>${metadata.date ? formatDate(metadata.date.slice(0, 10)) : "Official source"}</span><strong>${metadata.repackSize || "Official page"}</strong>`;
+    sizeRow.innerHTML = `<span>${metadata.date ? formatDate(metadata.date.slice(0, 10)) : "Source page"}</span><strong>${metadata.repackSize || "Details page"}</strong>`;
   }
 }
 
@@ -391,13 +398,16 @@ function closeDrawer() {
 }
 
 async function loadData() {
-  const [catalogResponse, richResponse] = await Promise.all([
+  const [catalogResponse, richResponse, enrichedResponse] = await Promise.all([
     fetch("data/catalog-index.json"),
     fetch("data/top-games.json"),
+    fetch("data/catalog-enriched.json"),
   ]);
   const catalogData = await catalogResponse.json();
   catalog = catalogData.games || [];
   richGames = await richResponse.json();
+  const enrichedData = enrichedResponse.ok ? await enrichedResponse.json() : { games: [] };
+  enrichedCatalog = Object.fromEntries((enrichedData.games || []).map((game) => [game.id, game]));
   try {
     const tagsResponse = await fetch("data/catalog-tags.json");
     catalogTags = tagsResponse.ok ? await tagsResponse.json() : {};
