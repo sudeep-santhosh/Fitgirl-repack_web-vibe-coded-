@@ -8,7 +8,19 @@ const fitgirlCachePath = path.join(dataDir, "catalog-metadata-cache.json");
 const steamCachePath = path.join(dataDir, "steam-cache.json");
 const outputPath = path.join(dataDir, "catalog-enriched.json");
 
-const strictGenres = ["Action", "Adventure", "RPG", "Strategy", "Simulation", "Puzzle", "Horror"];
+const strictGenres = [
+  "Action",
+  "Adventure",
+  "RPG",
+  "Strategy",
+  "Simulation",
+  "Puzzle",
+  "Horror",
+  "Racing",
+  "Sports",
+  "Platformer",
+  "Shooter",
+];
 const strictGenreSet = new Set(strictGenres);
 const args = new Set(process.argv.slice(2));
 const getArg = (name, fallback = "") => {
@@ -22,6 +34,10 @@ const options = {
   noFitgirlFetch: args.has("--no-fitgirl-fetch"),
   limit: Number(getArg("--limit", "0")),
   delay: Number(getArg("--delay", "350")),
+  ids: getArg("--ids", "")
+    .split(",")
+    .map((id) => id.trim())
+    .filter(Boolean),
 };
 
 async function readJson(filePath, fallback) {
@@ -55,10 +71,13 @@ function normalizeTitle(title) {
   return String(title || "")
     .replace(/\[[^\]]*]/g, " ")
     .replace(/\([^)]*(?:build|bonus|dlc|edition|windows|fix|multi|crack|update|ost)[^)]*\)/gi, " ")
+    .replace(/[+]\s*\d+\s*(?:dlcs?|bonuses?|bonus\s+content|ost|soundtrack)\b/gi, " ")
+    .replace(/\b\d+\s*(?:dlcs?|bonuses?|bonus\s+content|ost|soundtrack)\b/gi, " ")
     .replace(/\b(v|build)\s*[\d.]+[a-z0-9.-]*/gi, " ")
     .replace(/\b(deluxe|ultimate|complete|premium|definitive|gold|goty|collector'?s?|supporter)\s+edition\b/gi, " ")
+    .replace(/\bthe\s+official\s+(?:game|video\s*game)\b|\bofficial\s+(?:game|video\s*game)\b|\bofficial\b/gi, " ")
     .replace(/\b(all\s+)?dlcs?\b/gi, " ")
-    .replace(/\bbonus\b|\bcontent\b|\bost\b|\bwindows\s*\d+\s*fix\b/gi, " ")
+    .replace(/\bbonus(?:es)?\b|\bbonus\s+content\b|\bcontent\b|\bost\b|\bsoundtrack\b|\bbundle\b|\bgame\b|\bartbook\b|\brelease\b|\bwindows\s*\d+\s*fix\b/gi, " ")
     .replace(/[+*_:/|()[\],.-]+/g, " ")
     .replace(/\s+/g, " ")
     .trim()
@@ -102,12 +121,51 @@ function normalizeGenre(value) {
     ["sim", "Simulation"],
     ["puzzle", "Puzzle"],
     ["horror", "Horror"],
+    ["racing", "Racing"],
+    ["racing-game", "Racing"],
+    ["sports", "Sports"],
+    ["sport", "Sports"],
+    ["platformer", "Platformer"],
+    ["platform", "Platformer"],
+    ["2d-platformer", "Platformer"],
+    ["3d-platformer", "Platformer"],
+    ["shooter", "Shooter"],
+    ["shoot-em-up", "Shooter"],
   ]);
   return map.get(slug) || "";
 }
 
 function normalizeTag(value) {
   const slug = slugify(value);
+  const blockedTags = new Set([
+    "official",
+    "official-game",
+    "official-video-game",
+    "official-videogame",
+    "official-source",
+    "source",
+    "family-sharing",
+    "steam-achievements",
+    "steam-cloud",
+    "steam-trading-cards",
+    "steam-workshop",
+    "steam-leaderboards",
+    "valve-anti-cheat-enabled",
+    "captions-available",
+    "commentary-available",
+    "includes-level-editor",
+    "partial-controller-support",
+    "full-controller-support",
+    "remote-play-on-phone",
+    "remote-play-on-tablet",
+    "remote-play-on-tv",
+    "remote-play-together",
+    "shared-split-screen",
+    "shared-split-screen-co-op",
+    "shared-split-screen-pvp",
+    "cross-platform-multiplayer",
+  ]);
+  if (!slug || blockedTags.has(slug)) return "";
   const map = new Map([
     ["open-world", "Open World"],
     ["openworld", "Open World"],
@@ -146,6 +204,20 @@ function normalizeTag(value) {
     ["singleplayer", "Singleplayer"],
     ["pc", "PC"],
     ["steam-deck", "Steam Deck"],
+    ["hack-and-slash", "Hack and Slash"],
+    ["turn-based", "Turn-Based"],
+    ["crafting", "Crafting"],
+    ["arcade", "Arcade"],
+    ["cars", "Cars"],
+    ["crime", "Crime"],
+    ["3d", "3D"],
+    ["2d", "2D"],
+    ["jrpg", "JRPG"],
+    ["sci-fi", "Sci-Fi"],
+    ["psychological-horror", "Psychological Horror"],
+    ["walking-simulator", "Walking Simulator"],
+    ["choices-matter", "Choices Matter"],
+    ["action-rpg", "Action RPG"],
   ]);
   if (map.has(slug)) return map.get(slug);
   return value
@@ -185,12 +257,16 @@ function inferFromKeywords(entry) {
   if (has("civilization", "total-war", "xcom", "strategy", "tactics", "sudden-strike")) genres.add("Strategy");
   if (has("simulator", "simulation", "cities-skylines", "planet-coaster", "jurassic-world-evolution")) genres.add("Simulation");
   if (has("puzzle", "portal", "witness", "talos")) genres.add("Puzzle");
+  if (has("racing", "forza", "need-for-speed", "nfs", "motogp", "f1-", "wrc", "grid", "mxgp", "supercross")) genres.add("Racing");
+  if (has("sports", "sport", "cricket", "fifa", "football", "nba", "pga", "tennis", "olympic", "wwe", "tiebreak")) genres.add("Sports");
+  if (has("platformer", "crash-bandicoot", "spyro", "ori-", "super-meat-boy", "rayman")) genres.add("Platformer");
+  if (has("shooter", "call-of-duty", "battlefield", "doom", "quake", "halo", "fps", "borderlands")) genres.add("Shooter");
   if (has("rpg", "elden-ring", "baldur", "dragon-s-dogma", "cyberpunk", "witcher", "fallout", "coromon")) genres.add("RPG");
   if (has("action", "far-cry", "assassin", "gta", "grand-theft-auto", "devil-may-cry")) genres.add("Action");
   if (!genres.size) genres.add("Adventure");
 
-  if (has("open-world", "grand-theft-auto", "gta", "far-cry", "forza-horizon", "elden-ring", "cyberpunk", "assassin-s-creed")) tags.add("Open World");
-  if (has("survival", "subnautica", "forest")) tags.add("Survival");
+  if (has("open-world", "grand-theft-auto", "gta", "far-cry", "forza-horizon", "elden-ring", "cyberpunk", "assassin-s-creed", "astroneer")) tags.add("Open World");
+  if (has("survival", "survivors", "subnautica", "forest", "astroneer", "vampire-survivors", "grind-survivors", "soulstone-survivors")) tags.add("Survival");
   if (has("co-op", "coop")) tags.add("Co-op");
   if (has("multiplayer", "online")) tags.add("Multiplayer");
   if (has("far-cry", "cyberpunk", "call-of-duty", "battlefield", "fps")) tags.add("First-Person");
@@ -202,6 +278,10 @@ function inferFromKeywords(entry) {
   if (has("elden-ring", "dragon-s-dogma", "baldur", "fantasy")) tags.add("Fantasy");
   if (has("valhalla", "historical")) tags.add("Historical");
   if (has("far-cry", "battlefield", "call-of-duty")) tags.add("Military");
+  if (has("roguelike", "roguelite", "hades", "survivors", "vampire-survivors", "grind-survivors", "soulstone-survivors", "rogue-genesia")) tags.add("Roguelike");
+  if (has("hack-and-slash", "devil-may-cry", "hades")) tags.add("Hack and Slash");
+  if (has("turn-based", "xcom", "civilization", "baldur")) tags.add("Turn-Based");
+  if (has("crafting", "minecraft", "terraria", "subnautica", "forest")) tags.add("Crafting");
 
   return { genres, tags };
 }
@@ -209,6 +289,7 @@ function inferFromKeywords(entry) {
 async function steamSearch(normalizedTitle, steamCache) {
   const cacheKey = `search:${normalizedTitle}`;
   if (steamCache[cacheKey]) return steamCache[cacheKey];
+  if (options.offline) return null;
   const url = `https://store.steampowered.com/api/storesearch/?term=${encodeURIComponent(normalizedTitle)}&cc=us&l=en`;
   const response = await fetch(url);
   if (!response.ok) throw new Error(`Steam search failed: ${response.status}`);
@@ -225,6 +306,7 @@ async function steamSearch(normalizedTitle, steamCache) {
 async function steamDetails(appid, steamCache) {
   const cacheKey = `app:${appid}`;
   if (steamCache[cacheKey]) return steamCache[cacheKey];
+  if (options.offline) return null;
   const detailsUrl = `https://store.steampowered.com/api/appdetails?appids=${appid}&cc=us&l=en`;
   const response = await fetch(detailsUrl);
   if (!response.ok) throw new Error(`Steam details failed: ${response.status}`);
@@ -306,28 +388,26 @@ async function enrichEntry(entry, caches) {
   let steamAppId = null;
   let steamName = "";
 
-  if (!options.offline) {
-    try {
-      const match = await steamSearch(normalizedTitle, caches.steam);
-      if (match?.appid) {
-        const details = await steamDetails(match.appid, caches.steam);
-        if (details) {
-          steamAppId = details.appid;
-          steamName = details.name;
-          addSourceGenres(genres, tags, details.genres);
-          addNormalized(tags, details.tags, "tag");
-          sources.push("steam");
-        }
+  try {
+    const match = await steamSearch(normalizedTitle, caches.steam);
+    if (match?.appid) {
+      const details = await steamDetails(match.appid, caches.steam);
+      if (details) {
+        steamAppId = details.appid;
+        steamName = details.name;
+        addSourceGenres(genres, tags, details.genres);
+        addSourceGenres(genres, tags, details.tags);
+        sources.push("steam");
       }
-    } catch (error) {
-      caches.steam[`error:${normalizedTitle}`] = { message: error.message, at: new Date().toISOString() };
     }
+  } catch (error) {
+    caches.steam[`error:${normalizedTitle}`] = { message: error.message, at: new Date().toISOString() };
   }
 
   if (!genres.size) {
     const fitgirl = await fitgirlFetchMetadata(entry, caches.fitgirl);
     addSourceGenres(genres, tags, fitgirl.genres);
-    addNormalized(tags, fitgirl.tags, "tag");
+    addSourceGenres(genres, tags, fitgirl.tags);
     if (fitgirl.tags.length) sources.push("fitgirl");
   }
 
@@ -339,21 +419,23 @@ async function enrichEntry(entry, caches) {
   if (!genres.size) {
     const inferred = inferFromKeywords(entry);
     inferred.genres.forEach((genre) => genres.add(genre));
-    inferred.tags.forEach((tag) => tags.add(tag));
+    if (!tags.size) inferred.tags.forEach((tag) => tags.add(tag));
     sources.push("keyword");
-  } else {
-    const inferred = inferFromKeywords(entry);
-    inferred.tags.forEach((tag) => tags.add(tag));
   }
 
   const normalizedGenres = [...genres].filter((genre) => strictGenreSet.has(genre));
+  const normalizedTags = [...tags]
+    .map(normalizeTag)
+    .filter(Boolean)
+    .filter((tag) => !strictGenreSet.has(tag))
+    .sort((a, b) => a.localeCompare(b));
   return {
     id: entry.id,
     title: entry.title,
     normalizedTitle,
     url: entry.url,
     genres: normalizedGenres.length ? normalizedGenres : ["Adventure"],
-    tags: [...tags].filter(Boolean).sort((a, b) => a.localeCompare(b)),
+    tags: [...new Set(normalizedTags)],
     steamAppId,
     steamName,
     sources: [...new Set(sources)],
@@ -369,7 +451,13 @@ const caches = {
   steam: await readJson(steamCachePath, {}),
 };
 
-const entries = options.limit ? catalog.games.slice(0, options.limit) : catalog.games;
+let entries = catalog.games;
+if (options.ids.length) {
+  const idSet = new Set(options.ids);
+  entries = entries.filter((entry) => idSet.has(entry.id));
+} else if (options.limit) {
+  entries = entries.slice(0, options.limit);
+}
 let processed = 0;
 
 for (const entry of entries) {
