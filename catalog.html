@@ -14,7 +14,8 @@
     <header class="site-header">
       <a class="brand" href="/" aria-label="FitGirl Catalog home">
         <span class="fitgirl-mark" aria-hidden="true">
-          <svg viewBox="0 0 48 48" role="img">
+          <img class="fitgirl-mark-image" src="assets/fitgirl-logo.png" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'" />
+          <svg class="fitgirl-mark-fallback" viewBox="0 0 48 48" role="img">
             <circle cx="24" cy="24" r="22" />
             <path d="M15 29c2.5 5.5 15.5 5.5 18 0" />
             <path d="M16 19c4-8 14-8 18 0" />
@@ -35,6 +36,8 @@
         <a href="#results">Results</a>
         <a href="#safety">Safety</a>
       </nav>
+
+      <img class="corner-logo" src="assets/fitgirl-logo.png" alt="FitGirl logo" onerror="this.hidden=true" />
     </header>
 
     <main>
